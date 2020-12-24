@@ -8,23 +8,13 @@ from palliatives.models import Category, Item
 class CategoryType(DjangoObjectType):
     class Meta:
         model = Category
-        # fields = ("id", "name", "items")
-        filter_fields = ['name', 'items']
-        interfaces = (relay.Node, )
+        fields = ("id", "name", "items")
 
 
 class ItemsType(DjangoObjectType):
     class Meta:
         model = Item
-        # fields = ("id", "name", "notes", "category")
-        # Allow for more advanced filtering here
-        filter_fields = {
-            "name": ['exact', "icontains", "istartswith"],
-            'notes': ['exact', 'icontains'],
-            'category': ['exact'],
-            'category__name': ['exact'],
-        }
-        interfaces = (relay.Node, )
+        fields = ("id", "name", "notes", "category")
 
 
 class Query(graphene.ObjectType):
